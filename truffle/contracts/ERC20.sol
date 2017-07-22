@@ -5,7 +5,7 @@ pragma solidity ^0.4.8;
 // ----------------------------------------------------------------------------------------------
 // ERC Token Standard #20 Interface
 // https://github.com/ethereum/EIPs/issues/20
-contract ERC20Interface {
+contract ERC20 {
     // Get the total token supply
     function totalSupply() constant returns (uint256 totalSupply);
     // Get the account balance of another account with address _owner

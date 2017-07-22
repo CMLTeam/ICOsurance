@@ -2,7 +2,7 @@ pragma solidity ^0.4.8;
 
 import "./ERC20Interface.sol";
 
-contract FixedSupplyToken is ERC20Interface {
+contract FixedSupplyToken is ERC20 {
     string public constant symbol = "FIXED";
     string public constant name = "Example Fixed Supply Token";
     uint8 public constant decimals = 18;
