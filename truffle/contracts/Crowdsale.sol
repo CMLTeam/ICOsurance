@@ -42,14 +42,15 @@ contract Crowdsale {
 			throw;
 		}
 		uint totalAmount = msg.value;
-		uint ratio = tokenInsurer.getRatio(tokenReward.symbol);
+		uint ratio = 10; // TODO should depend on ICO symbol
 		uint beneficiaryAmount = totalAmount * (1 - ratio / 100);
 		uint insurerAmount = totalAmount * ratio / 100;
 		balanceOf[msg.sender] = beneficiaryAmount;
 		amountRaised += beneficiaryAmount;
 		tokenReward.transfer(msg.sender, totalAmount / price);
 		tokenInsurer.transfer(msg.sender, totalAmount / price); // TODO
-		tokenInsurer.owner.send(insurerAmount); // send insurance payment to insurer
+		address insurerAddr = tokenInsurer.owner();
+		insurerAddr.transfer(insurerAmount); // send insurance payment to insurer
 		FundTransfer(msg.sender, totalAmount, true);
 	}
 
