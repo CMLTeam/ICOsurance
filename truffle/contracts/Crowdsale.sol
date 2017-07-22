@@ -39,11 +39,15 @@ contract Crowdsale {
 		if (crowdsaleClosed) {
 			throw;
 		}
-		uint amount = msg.value;
-		balanceOf[msg.sender] = amount;
-		amountRaised += amount;
-		tokenReward.transfer(msg.sender, amount / price);
-		FundTransfer(msg.sender, amount, true);
+		uint totalAmount = msg.value;
+		uint beneficiaryAmount = totalAmount * (1 - ratio / 100);
+		uint insurerAmount = totalAmount * ratio / 100;
+		balanceOf[msg.sender] = beneficiaryAmount;
+		amountRaised += beneficiaryAmount;
+		tokenReward.transfer(msg.sender, totalAmount / price);
+		tokenInsurer.transfer(msg.sender, totalAmount / price);
+		tokenInsurer.owner.send(insurer, insurerAmount);
+		FundTransfer(msg.sender, totalAmount, true);
 	}
 
 	modifier afterDeadline() {
