@@ -3,6 +3,16 @@
 	<script type="text/javascript" src="web3/web3.js"></script>
 </head>
 <body>
+	<textarea id="code" cols="100" rows="20">
+c.innerHTML = "Accounts:\n";
+c.innerHTML += web3.eth.accounts.join("\n");
+var balances = [];
+web3.eth.accounts.forEach(function(account, i) {
+	balances.push(web3.eth.getBalance(account));
+});
+c.innerHTML += "\n\nBalances:\n";
+c.innerHTML += balances.join("\n");
+	</textarea><br/>
 	Host: <input type="text" id="host" value="10.0.110.143"> <input type="button" value="execute" onclick="execute()">
 	<pre id="console">
 
@@ -13,16 +23,10 @@
 	var web3 = new Web3();
 	web3.setProvider(new web3.providers.HttpProvider("http://" + document.getElementById("host").value + ":8545"));
 	var c = document.getElementById("console");
+	var cd = document.getElementById("code");
 
 	function execute() {
-		c.innerHTML = "Accounts:\n";
-		c.innerHTML += web3.eth.accounts.join("\n");
-		var balances = [];
-		web3.eth.accounts.forEach(function(account, i) {
-			balances.push(web3.eth.getBalance(account));
-		});
-		c.innerHTML += "\n\nBalances:\n";
-		c.innerHTML += balances.join("\n");
+		eval(cd.value);
 	}
 </script>
 </html>
