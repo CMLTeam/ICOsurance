@@ -1,8 +1,7 @@
 pragma solidity ^0.4.8;
 
-contract token {
-	function transfer(address receiver, uint amount);
-}
+import "./CoolICOToken.sol";
+import "./InsuranceToken.sol";
 
 contract Crowdsale {
 	address public beneficiary;
@@ -10,7 +9,8 @@ contract Crowdsale {
 	uint public amountRaised;
 	uint public deadline;
 	uint public price;
-	token public tokenReward;
+	CoolICOToken public tokenReward;
+	InsuranceToken public tokenInsurer;
 	mapping(address => uint256) public balanceOf;
 	bool fundingGoalReached = false;
 	event GoalReached(address beneficiary, uint amountRaised);
@@ -25,13 +25,15 @@ contract Crowdsale {
 		uint fundingGoalInEthers,
 		uint durationInMinutes,
 		uint etherCostOfEachToken,
-		token addressOfTokenUsedAsReward
+		CoolICOToken addressOfTokenUsedAsReward,
+		InsuranceToken addressOfInsuranceToken
 	) {
 		beneficiary = ifSuccessfulSendTo;
 		fundingGoal = fundingGoalInEthers * 1 ether;
 		deadline = now + durationInMinutes * 1 minutes;
 		price = etherCostOfEachToken * 1 ether;
-		tokenReward = token(addressOfTokenUsedAsReward);
+		tokenReward = CoolICOToken(addressOfTokenUsedAsReward);
+		tokenInsurer = InsuranceToken(addressOfInsuranceToken);
 	}
 
 	/* The function without name is the default function that is called whenever anyone sends funds to a contract */
@@ -40,13 +42,14 @@ contract Crowdsale {
 			throw;
 		}
 		uint totalAmount = msg.value;
+		uint ratio = tokenInsurer.getRatio(tokenReward.symbol);
 		uint beneficiaryAmount = totalAmount * (1 - ratio / 100);
 		uint insurerAmount = totalAmount * ratio / 100;
 		balanceOf[msg.sender] = beneficiaryAmount;
 		amountRaised += beneficiaryAmount;
 		tokenReward.transfer(msg.sender, totalAmount / price);
-		tokenInsurer.transfer(msg.sender, totalAmount / price);
-		tokenInsurer.owner.send(insurer, insurerAmount);
+		tokenInsurer.transfer(msg.sender, totalAmount / price); // TODO
+		tokenInsurer.owner.send(insurerAmount); // send insurance payment to insurer
 		FundTransfer(msg.sender, totalAmount, true);
 	}
 
