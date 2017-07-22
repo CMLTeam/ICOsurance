@@ -1,32 +1,39 @@
 pragma solidity ^0.4.8;
 
-import "./ERC20Insured.sol";
+import "./ERC20.sol";
 
-contract FixedSupplyInsuredToken is ERC20Insured {
-    string public constant symbol = "FIXED";
-    string public constant name = "Example Fixed Supply Token (Insured)";
+contract CoolICOToken is ERC20 {
+    string public constant symbol = "COOL";
+    string public constant name = "Cool ICO Token";
     uint8 public constant decimals = 18;
     uint256 _totalSupply = 1000000;
+    // Owner of this contract
     address public owner;
+    // Balances for each account
     mapping(address => uint256) balances;
+    // Owner of account approves the transfer of an amount to another account
     mapping(address => mapping (address => uint256)) allowed;
+    // Functions with this modifier can only be executed by the owner
     modifier onlyOwner() {
         if (msg.sender != owner) {
             throw;
         }
         _;
     }
-    function FixedSupplyInsuredToken() {
+    // Constructor
+    function CoolICOToken() {
         owner = msg.sender;
         balances[owner] = _totalSupply;
     }
     function totalSupply() constant returns (uint256 totalSupply) {
         totalSupply = _totalSupply;
     }
+    // What is the balance of a particular account?
     function balanceOf(address _owner) constant returns (uint256 balance) {
         return balances[_owner];
     }
-    function transferInsured(address _to, uint256 _amount) returns (bool success) {
+    // Transfer the balance from owner's account to another account
+    function transfer(address _to, uint256 _amount) returns (bool success) {
         if (balances[msg.sender] >= _amount
         && _amount > 0
         && balances[_to] + _amount > balances[_to]) {
@@ -38,10 +45,16 @@ contract FixedSupplyInsuredToken is ERC20Insured {
             return false;
         }
     }
-    function transferInsuredFrom(
-        address _from,
-        address _to,
-        uint256 _amount
+    // Send _value amount of tokens from address _from to address _to
+    // The transferFrom method is used for a withdraw workflow, allowing contracts to send
+    // tokens on your behalf, for example to "deposit" to a contract address and/or to charge
+    // fees in sub-currencies; the command should fail unless the _from account has
+    // deliberately authorized the sender of the message via some mechanism; we propose
+    // these standardized APIs for approval:
+    function transferFrom(
+    address _from,
+    address _to,
+    uint256 _amount
     ) returns (bool success) {
         if (balances[_from] >= _amount
         && allowed[_from][msg.sender] >= _amount
