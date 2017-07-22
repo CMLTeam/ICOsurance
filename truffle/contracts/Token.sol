@@ -17,7 +17,7 @@ contract Token is ERC20 {
 		name = _name;
 		symbol = _symbol;
 		decimals = _decimals;
-		totalSupply = _count;
+		_totalSupply = _count;
 		balances[msg.sender] = _count;
 	}
 

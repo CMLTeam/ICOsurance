@@ -1,8 +1,8 @@
 pragma solidity ^0.4.8;
 
-import "./ERC20InsuredInterface.sol";
+import "./ERC20Insured.sol";
 
-contract FixedSupplyInsuredToken is ERC20InsuredInterface {
+contract FixedSupplyInsuredToken is ERC20Insured {
     string public constant symbol = "FIXED";
     string public constant name = "Example Fixed Supply Token (Insured)";
     uint8 public constant decimals = 18;

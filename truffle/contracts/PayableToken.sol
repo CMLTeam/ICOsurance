@@ -7,14 +7,14 @@ contract PayableToken is Token {
 
 	function withdraw(uint _value) {
 		if (balances[msg.sender] >= _value) {
-			balances[msg.sender] -= _value;
-			totalSupply          -= _value;
+			balances[msg.sender]	-= _value;
+			_totalSupply					-= _value;
 			if(!msg.sender.send(_value)) throw;
 		}
 	}
 
 	function() payable {
-		balances[msg.sender] += msg.value;
-		totalSupply          += msg.value;
+		balances[msg.sender]	+= msg.value;
+		_totalSupply					+= msg.value;
 	}
 }

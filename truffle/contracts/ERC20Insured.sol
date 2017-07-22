@@ -1,9 +1,9 @@
 pragma solidity ^0.4.8;
 
-import "./ERC20Interface.sol";
+import "./ERC20.sol";
 
 // Enhanced ERC20 interface that encapsulates insurance logic
-contract ERC20InsuredInterface is ERC20Interface {
+contract ERC20Insured is ERC20 {
     function transfer(address _to, uint256 _value) returns (bool success) {
         return transferInsured(_to, _value);
     }
