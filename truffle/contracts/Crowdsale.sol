@@ -36,7 +36,9 @@ contract Crowdsale {
 
 	/* The function without name is the default function that is called whenever anyone sends funds to a contract */
 	function () payable {
-		if (crowdsaleClosed) throw;
+		if (crowdsaleClosed) {
+			throw;
+		}
 		uint amount = msg.value;
 		balanceOf[msg.sender] = amount;
 		amountRaised += amount;
@@ -44,7 +46,11 @@ contract Crowdsale {
 		FundTransfer(msg.sender, amount, true);
 	}
 
-	modifier afterDeadline() { if (now >= deadline) _; }
+	modifier afterDeadline() {
+		if (now >= deadline) {
+			_;
+		}
+	}
 
 	/* checks if the goal or time limit has been reached and ends the campaign */
 	function checkGoalReached() afterDeadline {
@@ -63,7 +69,8 @@ contract Crowdsale {
 			if (amount > 0) {
 				if (msg.sender.send(amount)) {
 					FundTransfer(msg.sender, amount, false);
-				} else {
+				}
+				else {
 					balanceOf[msg.sender] = amount;
 				}
 			}
@@ -72,7 +79,8 @@ contract Crowdsale {
 		if (fundingGoalReached && beneficiary == msg.sender) {
 			if (beneficiary.send(amountRaised)) {
 				FundTransfer(beneficiary, amountRaised, false);
-			} else {
+			}
+			else {
 				//If we fail to send the funds to beneficiary, unlock funders balance
 				fundingGoalReached = false;
 			}
