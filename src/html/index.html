@@ -3,6 +3,7 @@
 	<script type="text/javascript" src="web3/web3.js"></script>
 </head>
 <body>
+	Host: <input type="text" id="host" value="localhost"> <input type="button" value="execute" onclick="execute()">
 	<pre id="console">
 
 	</pre>
@@ -10,10 +11,11 @@
 <script type="text/javascript">
 	var Web3 = require('web3');
 	var web3 = new Web3();
-	web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
-
+	web3.setProvider(new web3.providers.HttpProvider("http://" + document.getElementById("host").value + ":8545"));
 	var c = document.getElementById("console");
-	c.innerHTML = web3.eth.accounts.join("\n");
 
+	function execute() {
+		c.innerHTML = web3.eth.accounts.join("\n");
+	}
 </script>
 </html>
