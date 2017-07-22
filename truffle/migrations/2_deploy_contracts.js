@@ -1,6 +1,6 @@
 // var ConvertLib = artifacts.require("./ConvertLib.sol");
 // var MetaCoin = artifacts.require("./MetaCoin.sol");
-var ERC20Interface = artifacts.require("./ERC20Interface.sol");
+var ERC20 = artifacts.require("./ERC20.sol");
 var FixedSupplyToken = artifacts.require("./FixedSupplyToken.sol");
 var FixedSupplyInsuredToken = artifacts.require("./FixedSupplyInsuredToken.sol");
 
