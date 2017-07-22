@@ -9,13 +9,20 @@
 	</pre>
 </body>
 <script type="text/javascript">
-	function execute() {
-		var Web3 = require('web3');
-		var web3 = new Web3();
-		web3.setProvider(new web3.providers.HttpProvider("http://" + document.getElementById("host").value + ":8545"));
-		var c = document.getElementById("console");
+	var Web3 = require('web3');
+	var web3 = new Web3();
+	web3.setProvider(new web3.providers.HttpProvider("http://" + document.getElementById("host").value + ":8545"));
+	var c = document.getElementById("console");
 
-		c.innerHTML = web3.eth.accounts.join("\n");
+	function execute() {
+		c.innerHTML = "Accounts:\n";
+		c.innerHTML += web3.eth.accounts.join("\n");
+		var balances = [];
+		web3.eth.accounts.forEach(function(account, i) {
+			balances.push(web3.eth.getBalance(account));
+		});
+		c.innerHTML += "\n\nBalances:\n";
+		c.innerHTML += balances.join("\n");
 	}
 </script>
 </html>
