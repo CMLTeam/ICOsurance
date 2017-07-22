@@ -13,7 +13,9 @@ web3.eth.accounts.forEach(function(account, i) {
 c.innerHTML += "\n\nBalances:\n";
 c.innerHTML += balances.join("\n");
 	</textarea><br/>
-	Host: <input type="text" id="host" value="10.0.110.143"> <input type="button" value="execute" onclick="execute()">
+	Host: <input type="text" id="host" value="10.0.110.143">
+	<input type="button" value="execute" onclick="execute()" />
+	<input type="button" value="clean" onclick="clean()" />
 	<pre id="console">
 
 	</pre>
@@ -28,5 +30,8 @@ c.innerHTML += balances.join("\n");
 	function execute() {
 		eval(cd.value);
 	}
+	function clean() {
+        c.innerHTML = "";
+    }
 </script>
 </html>
