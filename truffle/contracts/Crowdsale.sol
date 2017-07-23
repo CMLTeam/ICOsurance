@@ -21,19 +21,20 @@ contract Crowdsale {
 
 	/*  at initialization, setup the owner */
 	function Crowdsale(
-		address ifSuccessfulSendTo,
+//		address ifSuccessfulSendTo,
 		uint fundingGoalInEthers,
 		uint durationInMinutes,
 		uint etherCostOfEachToken,
-		CoolICOToken addressOfTokenUsedAsReward,
-		OwnedToken addressOfInsuranceToken
+		InsuranceToken _tokenInsurer,
+		CoolICOToken _tokenReward
 	) {
-		beneficiary = ifSuccessfulSendTo;
+//		beneficiary = ifSuccessfulSendTo;
+		beneficiary = msg.sender;
 		fundingGoal = fundingGoalInEthers * 1 ether;
 		deadline = now + durationInMinutes * 1 minutes;
 		price = etherCostOfEachToken * 1 ether;
-		tokenReward = CoolICOToken(addressOfTokenUsedAsReward);
-		tokenInsurer = InsuranceToken(addressOfInsuranceToken);
+		tokenInsurer = _tokenInsurer;
+		tokenReward = _tokenReward;
 	}
 
 	/* The function without name is the default function that is called whenever anyone sends funds to a contract */
