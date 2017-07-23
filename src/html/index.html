@@ -16,6 +16,11 @@
 
     <!-- Custom CSS -->
     <link href="css/one-page-wonder.css" rel="stylesheet">
+    <style type="text/css">
+        span {
+            padding-right: 10px;
+        }
+    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,10 +145,15 @@
         var verifyAddrInput = document.getElementById("verify_addr");
         var verifyStatusPlaceholder = document.getElementById("verify_status");
 
-        insuredAddrContainer.innerHTML = "<li><a href='#'>" + insuredAddresses.join("</a><li><a href='#'>") + "</a>";
-
         insuredAddresses.forEach(function(e, i) {
-            addressNamings.push(getTokenName(e));
+            var addressNaming = getTokenName(e);
+            addressNamings.push(addressNaming);
+            insuredAddrContainer.innerHTML += (
+                "<li><span>" +
+                e.slice(0, 5) +
+                "</span><span><a href='#'>" +
+                e +
+                "</a></span>");
         });
 
         function verify() {
