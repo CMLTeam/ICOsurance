@@ -144,17 +144,50 @@
         var verifyAddrInput = document.getElementById("verify_addr");
         var verifyStatusPlaceholder = document.getElementById("verify_status");
 
+        var masterContractAddress = "0x0";
+        var verifiableAbi = [
+            {
+                "constant": true,
+                "inputs": [
+                    {
+                        "name": "addr",
+                        "type": "address"
+                    }
+                ],
+                "name": "verify",
+                "outputs": [
+                    {
+                        "name": "ok",
+                        "type": "bool"
+                    }
+                ],
+                "payable": false,
+                "type": "function"
+            }
+        ];
+
+        var masterContract = web3.eth.contract(verifiableAbi).at(masterContractAddress);
+
         function verify() {
-            var address = verifyAddrInput.value;
+            verifyStatusPlaceholder.innerHTML = verifyAddress(verifyAddrInput.value);
+        }
+
+        function verifyAddress(address) {
             if(address.length == 0) {
-                verifyStatusPlaceholder.innerHTML = "EMPTY ADDRESS";
+                return "EMPTY ADDRESS";
             }
-            else if(insuredAddresses.indexOf(address) != -1) {
-                verifyStatusPlaceholder.innerHTML = "OK";
+            if(!isAddress(address)) {
+                return "NOT A VALID ADDR";
             }
-            else {
-                verifyStatusPlaceholder.innerHTML = "FAIL";
+            try {
+                if(masterContract.verify(address)) {
+                    return "OK";
+                }
             }
+            catch(err) {
+                console.error(err);
+            }
+            return "FAIL";
         }
 
         var namedAbi = [
@@ -192,15 +225,55 @@
                 return contract.symbol();
             }
             catch(err) {
-                console.log(err);
+                console.error(err);
                 return "N/A";
             }
         }
 
         insuredAddresses.forEach(function(e, i) {
-            var addressNaming = getTokenName(e);
-            insuredAddrContainer.innerHTML += ("<li><span>" + addressNaming + "</span><span><a href='#'>" + e + "</a></span>");
+            insuredAddrContainer.innerHTML += ("<li><span><a href='#'>" + e + "</a></span>");
         });
+
+
+        /**
+         * Checks if the given string is an address
+         *
+         * @method isAddress
+         * @param {String} address the given HEX adress
+         * @return {Boolean}
+         */
+        var isAddress = function (address) {
+            if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+                // check if it has the basic requirements of an address
+                return false;
+            } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+                // If it's all small caps or all all caps, return true
+                return true;
+            } else {
+                // Otherwise check each case
+                return isChecksumAddress(address);
+            }
+        };
+
+        /**
+         * Checks if the given string is a checksummed address
+         *
+         * @method isChecksumAddress
+         * @param {String} address the given HEX adress
+         * @return {Boolean}
+         */
+        var isChecksumAddress = function (address) {
+            // Check each case
+            address = address.replace('0x','');
+            var addressHash = sha3(address.toLowerCase());
+            for (var i = 0; i < 40; i++ ) {
+                // the nth letter should be uppercase if the nth digit of casemap is 1
+                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+                    return false;
+                }
+            }
+            return true;
+        };
 
 
     </script>
