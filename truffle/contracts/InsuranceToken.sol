@@ -13,8 +13,8 @@ import "./ERC20.sol";
 // after Claim investigation.
 //
 contract InsuranceToken is ERC20 {
-	string public constant symbol;
-	string public constant name;
+	string public constant symbol = "COOL_INS";
+	string public constant name = "COOL Insurance Token";
 	uint8 public constant decimals = 18;
 	uint insurancePercent = 10; // TODO should depend on ICO symbol
 
@@ -36,13 +36,15 @@ contract InsuranceToken is ERC20 {
 		_;
 	}
 	// Constructor
-	function InsuranceToken(string icoSymbol) {
-		symbol = icoSymbol + "_INS";
-		name = icoSymbol + " Insurance Token";
+	function InsuranceToken(/*string icoSymbol*/) {
+		// TODO make it work
+		//symbol = icoSymbol + "_INS";
+		//name = icoSymbol + " Insurance Token";
 		owner = msg.sender;
 	}
-//	function totalSupply() constant returns (uint256 totalSupply) {
-//	}
+	function totalSupply() constant returns (uint256 totalSupply) {
+		return 0; // hmm
+	}
 	// What is the balance of a particular account?
 	function balanceOf(address _owner) constant returns (uint256 balance) {
 		return balances[_owner];
