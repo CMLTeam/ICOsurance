@@ -134,6 +134,7 @@
         web3.setProvider(localProvider);
 
         var insuredAddresses = web3.eth.accounts;
+        var addressNamings = [];
 
         var insuredAddrContainer = document.getElementById("insured_addresses");
         var verifyAddrInput = document.getElementById("verify_addr");
@@ -141,8 +142,8 @@
 
         insuredAddrContainer.innerHTML = "<li><a href='#'>" + insuredAddresses.join("</a><li><a href='#'>") + "</a>";
 
-        insuredAddresses.forEach(function() {
-
+        insuredAddresses.forEach(function(e, i) {
+            addressNamings.push(e.slice(0, 5));
         });
 
         function verify() {
