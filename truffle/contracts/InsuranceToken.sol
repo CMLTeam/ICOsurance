@@ -8,7 +8,7 @@ import "./ERC20.sol";
 //
 // For every ICO its own instance of InsuranceToken will be deployed.
 //
-// The investors will have the ability to see the Insurance tokens in their wallet but won't be able
+// Investors will have the ability to see the Insurance tokens in their wallet but won't be able
 // to sell them back to this contract (to recover their ETH) till this is unlocked by Insurer Company
 // after Claim investigation.
 //
