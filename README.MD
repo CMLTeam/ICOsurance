@@ -20,7 +20,7 @@ Nowadays lots of ICOs suffer from cyber-security attacks. To name a few during l
 **Description**
 
 In this project we introduce the notion of [Insurance Token](https://github.com/CMLTeam/ICOsurance/blob/master/truffle/contracts/InsuranceToken.sol).
-This is a token which will accompany the [usual ICO token](https://github.com/CMLTeam/ICOsurance/blob/master/truffle/contracts/CoolICOToken.sol) and will be issued during crowdfunding.  
+This is a token which will accompany the [usual ICO token](https://github.com/CMLTeam/ICOsurance/blob/master/truffle/contracts/CoolICOToken.sol) and will be issued during crowdsale.  
 
 The Insurance Token will be issued by Insurance Company to any company doing ICO that wish to use it.
 
@@ -28,7 +28,7 @@ Insurance company will engage security auditors to validate the source code of t
 The insurance agreement being settled as a result will include the insurance payment rate.
 The insurance payment rate will be the higher - the higher complexity and size of ICO/token code.
 
-The whole essence of using this project is that the ICO company during the crowdfunding process will implicitly issue to investor 
+The whole essence of using this project is that the ICO company during the crowdsale process will implicitly issue to investor 
 the insurance token for every sold ICO token in some proportion (agreed with Insurance Company).
 
 These Insurance tokens being ERC20-compatible will be visible in User's wallet but are not intended to be transferred/traded and will be essentially locked.
