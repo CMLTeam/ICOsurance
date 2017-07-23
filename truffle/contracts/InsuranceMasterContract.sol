@@ -1,8 +1,9 @@
 pragma solidity ^0.4.8;
 
 import "./InsuranceToken.sol";
+import "./Verifiable.sol";
 
-contract InsuranceMasterContract {
+contract InsuranceMasterContract is Verifiable {
     address owner;
     mapping(address => bool) tokensByAddress;
     mapping(string => bool) tokensBySymbol;
@@ -20,7 +21,7 @@ contract InsuranceMasterContract {
     function validateBySymbol(string icoSymbol) returns (bool) {
         return tokensBySymbol[icoSymbol];
     }
-    function validateByAddress(address icoTokenAddr) returns (bool) {
+    function verify(address icoTokenAddr) constant returns (bool ok) {
         return tokensByAddress[icoTokenAddr];
     }
 }
