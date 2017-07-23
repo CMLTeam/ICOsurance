@@ -10,7 +10,7 @@ contract Crowdsale {
 	uint public deadline;
 	uint public price;
 	CoolICOToken public tokenReward;
-	OwnedToken public tokenInsurer;
+	InsuranceToken public tokenInsurer;
 	mapping(address => uint256) public balanceOf;
 	bool fundingGoalReached = false;
 	event GoalReached(address beneficiary, uint amountRaised);
