@@ -6,7 +6,7 @@ import "./ERC20.sol";
 // Insurance Token is based on ERC20. The main difference is that it won't have fixed total supply since
 // its emission is chained with emission of ICO token.
 //
-// For every ICO it's own instance of InsuranceToken will be deployed.
+// For every ICO its own instance of InsuranceToken will be deployed.
 //
 // The investors will have the ability to see the Insurance tokens in their wallet but won't be able
 // to sell them back to this contract (to recover their ETH) till this is unlocked by Insurer Company
