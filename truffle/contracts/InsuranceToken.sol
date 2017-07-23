@@ -4,7 +4,7 @@ import "./ERC20.sol";
 
 //
 // Insurance Token is based on ERC20. The main difference is that it won't have fixed total supply since
-// its emission is chained with emmision of ICO token.
+// its emission is chained with emission of ICO token.
 //
 // For every ICO it's own instance of InsuranceToken will be deployed.
 //
