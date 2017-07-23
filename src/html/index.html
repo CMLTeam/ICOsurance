@@ -84,7 +84,7 @@
             </h2>
             <div class="lead">
                 <label for="verify_addr">Verify if the ICO is Insured:</label><br/>
-                <input type="text" id="verify_addr"> <input type="button" value="Verify" onclick="verify()"> <span id="verify_status"></span>
+                <input id="verify_addr"> <input type="button" value="Verify" onclick="verify()"> <span id="verify_status"></span>
             </div>
             <div class="lead">
                 Recently Insured:
@@ -145,10 +145,10 @@
 
         function verify() {
             var address = verifyAddrInput.value;
-            if(address.length == 0) {
-                verifyStatusPlaceholder.innerHTML = "EMPTY ADDRESS";
+            if(address.length === 0) {
+                verifyStatusPlaceholder.innerHTML = "THE ADDRESS IS EMPTY";
             }
-            else if(insuredAddresses.indexOf(address) != -1) {
+            else if(insuredAddresses.indexOf(address) !== -1) {
                 verifyStatusPlaceholder.innerHTML = "OK";
             }
             else {
