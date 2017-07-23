@@ -10,12 +10,15 @@ contract Crowdsale {
 	uint public deadline;
 	uint public price;
 	CoolICOToken public tokenReward;
+	address insurerAddr;
 	InsuranceToken public tokenInsurer;
 	mapping(address => uint256) public balanceOf;
 	bool fundingGoalReached = false;
 	event GoalReached(address beneficiary, uint amountRaised);
 	event FundTransfer(address backer, uint amount, bool isContribution);
 	bool crowdsaleClosed = false;
+
+	uint insurancePercent = 10; // TODO should depend on ICO symbol
 
 	/* data structure to hold information about campaign contributors */
 
@@ -25,7 +28,7 @@ contract Crowdsale {
 		uint fundingGoalInEthers,
 		uint durationInMinutes,
 		uint etherCostOfEachToken,
-		InsuranceToken _tokenInsurer,
+		address _insurerAddr,
 		CoolICOToken _tokenReward
 	) {
 //		beneficiary = ifSuccessfulSendTo;
@@ -33,7 +36,8 @@ contract Crowdsale {
 		fundingGoal = fundingGoalInEthers * 1 ether;
 		deadline = now + durationInMinutes * 1 minutes;
 		price = etherCostOfEachToken * 1 ether;
-		tokenInsurer = _tokenInsurer;
+		insurerAddr = _insurerAddr;
+		tokenInsurer = InsuranceToken(_insurerAddr);
 		tokenReward = _tokenReward;
 	}
 
@@ -43,15 +47,17 @@ contract Crowdsale {
 			throw;
 		}
 		uint totalAmount = msg.value;
-		uint ratio = 10; // TODO should depend on ICO symbol
-		uint beneficiaryAmount = totalAmount * (1 - ratio / 100);
-		uint insurerAmount = totalAmount * ratio / 100;
+		uint beneficiaryAmount = totalAmount * (1 - insurancePercent / 100);
+		uint insurerAmount = totalAmount * insurancePercent / 100;
 		balanceOf[msg.sender] = beneficiaryAmount;
 		amountRaised += beneficiaryAmount;
 		tokenReward.transfer(msg.sender, totalAmount / price);
-		tokenInsurer.transfer(msg.sender, totalAmount / price); // TODO
-		address insurerAddr = tokenInsurer.owner();
-		insurerAddr.transfer(insurerAmount); // send insurance payment to insurer
+
+		// Here is where the magic happens.
+		// ICO sends part of invested money to its linked insurance contact.
+		// This implies generation of some ammount of insurance tokens for every issues ICO token.
+		insurerAddr.transfer(insurerAmount);
+
 		FundTransfer(msg.sender, totalAmount, true);
 	}
 

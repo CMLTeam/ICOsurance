@@ -2,17 +2,32 @@ pragma solidity ^0.4.8;
 
 import "./ERC20.sol";
 
+//
+// Insurance Token is based on ERC20. The main difference is that it won't have fixed total supply since
+// its emission is chained with emmision of ICO token.
+//
+// For every ICO it's own instance of InsuranceToken will be deployed.
+//
+// The investors will have the ability to see the Insurance tokens in their wallet but won't be able
+// to sell them back to this contract (to recover their ETH) till this is unlocked by Insurer Company
+// after Claim investigation.
+//
 contract InsuranceToken is ERC20 {
-	string public constant symbol = "INS";
-	string public constant name = "Insurance Token";
+	string public constant symbol;
+	string public constant name;
 	uint8 public constant decimals = 18;
-	uint256 _totalSupply = 1000000;
+	uint insurancePercent = 10; // TODO should depend on ICO symbol
+
 	// Owner of this contract
+    // This should be belonging to Insurance company
 	address public owner;
+
 	// Balances for each account
 	mapping(address => uint256) balances;
+
 	// Owner of account approves the transfer of an amount to another account
 	mapping(address => mapping (address => uint256)) allowed;
+
 	// Functions with this modifier can only be executed by the owner
 	modifier onlyOwner() {
 		if (msg.sender != owner) {
@@ -21,13 +36,13 @@ contract InsuranceToken is ERC20 {
 		_;
 	}
 	// Constructor
-	function InsuranceToken() {
+	function InsuranceToken(string icoSymbol) {
+		symbol = icoSymbol + "_INS";
+		name = icoSymbol + " Insurance Token";
 		owner = msg.sender;
-		balances[owner] = _totalSupply;
 	}
-	function totalSupply() constant returns (uint256 totalSupply) {
-		totalSupply = _totalSupply;
-	}
+//	function totalSupply() constant returns (uint256 totalSupply) {
+//	}
 	// What is the balance of a particular account?
 	function balanceOf(address _owner) constant returns (uint256 balance) {
 		return balances[_owner];
@@ -76,5 +91,12 @@ contract InsuranceToken is ERC20 {
 
 	function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
 		return allowed[_owner][_spender];
+	}
+
+	// issue insurance token to the investor in exchange to ETH
+	function () payable {
+		uint ethSentByCrowdsale = msg.value;
+	    owner.transfer(ethSentByCrowdsale);
+		balances[tx.origin] = ethSentByCrowdsale;
 	}
 }
