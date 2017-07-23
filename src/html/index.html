@@ -137,6 +137,7 @@
         var web3 = new Web3();
         web3.setProvider(getWeb3Provider());
 
+        // TODO: this is a dummy list atm
         var insuredAddresses = web3.eth.accounts;
 
         var insuredAddrContainer = document.getElementById("insured_addresses");
@@ -144,27 +145,27 @@
         var verifyStatusPlaceholder = document.getElementById("verify_status");
 
         var masterContractAddress = getParam("master_addr") || "0x2d16e8a1d30264f212933525ce9db3609a683373";
-        var verifiableAbi = [
-            {
-                "constant": true,
-                "inputs": [
-                    {
-                        "name": "addr",
-                        "type": "address"
-                    }
-                ],
-                "name": "verify",
-                "outputs": [
-                    {
-                        "name": "ok",
-                        "type": "bool"
-                    }
-                ],
-                "payable": false,
-                "type": "function"
-            }
-        ];
+        var verifiableAbi = [{
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "verify",
+            "outputs": [
+                {
+                    "name": "ok",
+                    "type": "bool"
+                }
+            ],
+            "payable": false,
+            "type": "function"
+        }];
         var masterContract = web3.eth.contract(verifiableAbi).at(masterContractAddress);
+
+
 
         function verify() {
             verifyStatusPlaceholder.innerHTML = validateAnAddress(verifyAddrInput.value);
@@ -199,6 +200,10 @@
             }
             try {
                 if(masterContract.verify(address)) {
+                    return "OK";
+                }
+                // TODO: fallback section will be removed
+                if(insuredAddresses.indexOf(address) != -1) {
                     return "OK";
                 }
             }
