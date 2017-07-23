@@ -29,7 +29,7 @@ The insurance agreement being settled as a result will include the insurance pay
 The insurance payment rate will be the higher - the higher complexity and size of ICO/token code.
 
 The whole essence of using this project is that the ICO company during the crowdsale process will implicitly issue to investor 
-the insurance token for every sold ICO token in some proportion (agreed with Insurance Company).
+the insurance token for every sold ICO token in some proportion (Defined by Actuary Department within Insurance Company).
 
 These Insurance tokens being ERC20-compatible will be visible in User's wallet but are not intended to be transferred/traded and will be essentially locked.
 
@@ -38,7 +38,7 @@ Claim investigation. If/when the Claim is confirmed the Insurer [unlocks](https:
 the Insurance Token for the suffered ICO, token gets released to be reimbursed.
 Now the ICO Investor can return the Insurance token back to contract address and gets back the whole body of his investment in ETH.
 
-We hope that only small fraction of ICO participating in the insurance pool really suffer from the cyber-attack and so it will be enough money to fulfill all potential claims.
+We hope that only small fraction of ICO participating in the insurance pool really suffers from the cyber-attack and so it will be enough money to fulfill all potential claims.
 
 _What this project IS NOT_
 
@@ -46,11 +46,11 @@ _What this project IS NOT_
 - This is not an insurance against fraud/scam ICOs. It's responsibility of an investor to properly assess a project to invest in.
 
 **Why do you think Blockchain/SmartContract may be the right approach?**
-- [Eating your own dog food](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) - use blockchain itself to protect blockchain
-- all the logic is implemented as smart contract and operates on crypto-currency only (no fiat) so no risks due to volatility involved
+- [Eating your own dog food](https://en.wikipedia.org/wiki/Eating_your_own_dog_food) - [use blockchain itself to protect blockchain](https://twitter.com/justrocknrolla/status/888757693841895428)
+- all the logic is implemented as a smart contract and operates on crypto-currency only (no fiat) so no risks due to volatility involved
 
 **API/DATA/Gadget you are thinking about using:** 
-Ethereum, [ERC20](https://theethereum.wiki/w/index.php/ERC20_Token_Standard), mock data (real data in future).
+Ethereum, [ERC20](https://theethereum.wiki/w/index.php/ERC20_Token_Standard), testrpc, truffle, geth, mock data (real data in future).
 
 **What area do you need help on?:**
 Insurance specialists
