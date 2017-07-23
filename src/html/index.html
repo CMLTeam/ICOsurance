@@ -84,7 +84,9 @@
             </h2>
             <div class="lead">
                 <label for="verify_addr">Verify if the ICO is Insured:</label><br/>
-                <input type="text" id="verify_addr"> <input type="button" value="Verify" onclick="verify()"> <span id="verify_status"></span>
+                <input type="text" id="verify_addr" size="36">
+                <input type="button" value="Verify" onclick="verify()">
+                <span id="verify_status"></span>
             </div>
             <div class="lead">
                 Recently Insured:
@@ -132,6 +134,8 @@
         web3.setProvider(localProvider);
 
         var insuredAddresses = web3.eth.accounts;
+        var addressNamings = [];
+
 
         var insuredAddrContainer = document.getElementById("insured_addresses");
         var verifyAddrInput = document.getElementById("verify_addr");
@@ -139,8 +143,8 @@
 
         insuredAddrContainer.innerHTML = "<li><a href='#'>" + insuredAddresses.join("</a><li><a href='#'>") + "</a>";
 
-        insuredAddresses.forEach(function() {
-
+        insuredAddresses.forEach(function(e, i) {
+            addressNamings.push(e.substring(5));
         });
 
         function verify() {
