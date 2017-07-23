@@ -135,26 +135,14 @@
     <script type="text/javascript">
         var Web3 = require('web3');
         var web3 = new Web3();
-        var localProvider = new web3.providers.HttpProvider("http://10.0.110.143:8545");
+        var localProvider = new web3.providers.HttpProvider("http://localhost:8545");
         web3.setProvider(localProvider);
 
         var insuredAddresses = web3.eth.accounts;
-        var addressNamings = [];
 
         var insuredAddrContainer = document.getElementById("insured_addresses");
         var verifyAddrInput = document.getElementById("verify_addr");
         var verifyStatusPlaceholder = document.getElementById("verify_status");
-
-        insuredAddresses.forEach(function(e, i) {
-            var addressNaming = getTokenName(e);
-            addressNamings.push(addressNaming);
-            insuredAddrContainer.innerHTML += (
-                "<li><span>" +
-                e.slice(0, 5) +
-                "</span><span><a href='#'>" +
-                e +
-                "</a></span>");
-        });
 
         function verify() {
             var address = verifyAddrInput.value;
@@ -199,9 +187,22 @@
         ];
 
         function getTokenName(address) {
-            var contract = web3.eth.contract(address, namedAbi);
-            return contract.call.symbol();
+            try {
+                var contract = web3.eth.contract(namedAbi).at(address);
+                return contract.symbol();
+            }
+            catch(err) {
+                console.log(err);
+                return "N/A";
+            }
         }
+
+        insuredAddresses.forEach(function(e, i) {
+            var addressNaming = getTokenName(e);
+            insuredAddrContainer.innerHTML += ("<li><span>" + addressNaming + "</span><span><a href='#'>" + e + "</a></span>");
+        });
+
+
     </script>
 
 </body>
