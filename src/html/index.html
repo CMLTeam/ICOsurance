@@ -143,7 +143,7 @@
         insuredAddrContainer.innerHTML = "<li><a href='#'>" + insuredAddresses.join("</a><li><a href='#'>") + "</a>";
 
         insuredAddresses.forEach(function(e, i) {
-            addressNamings.push(e.slice(0, 5));
+            addressNamings.push(getTokenName(e));
         });
 
         function verify() {
@@ -157,6 +157,40 @@
             else {
                 verifyStatusPlaceholder.innerHTML = "FAIL";
             }
+        }
+
+        var namedAbi = [
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "name",
+                "outputs": [
+                    {
+                        "name": "name",
+                        "type": "string"
+                    }
+                ],
+                "payable": false,
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "symbol",
+                "outputs": [
+                    {
+                        "name": "symbol",
+                        "type": "string"
+                    }
+                ],
+                "payable": false,
+                "type": "function"
+            }
+        ];
+
+        function getTokenName(address) {
+            var contract = web3.eth.contract(address, namedAbi);
+            return contract.call.symbol();
         }
     </script>
 
