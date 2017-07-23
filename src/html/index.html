@@ -54,11 +54,6 @@
                     <li>
                         <a href="#services">How to Apply</a>
                     </li>
-<!--
-                    <li>
-                        <a href="#contact">Contact Us</a>
-                    </li>
--->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -94,16 +89,6 @@
             <div class="lead">
                 List of ICOs Insured:
                 <ol style="font: 0.7em monospace;" id="insured_addresses">
-                    <li><a href="">0x7b2419e0ee0bd034f7bf24874c12512acac6e21c</a>
-                    <li><a href="">0x9c7bc14e8a4b054e98c6db99b9f1ea2797baee7b</a>
-                    <li><a href="">0x8d6d63c22d114c18c2a0da6db0a8972ed9c40343</a>
-                    <li><a href="">0x9567397b445998e7e405d5fc3d239391bf5d0200</a>
-                    <li><a href="">0x5d2fca837fdfddcb034555d8e79ca76a54038e16</a>
-                    <li><a href="">0xd3b6b8528841c1c9a63ffa38d96785c32e004fa5</a>
-                    <li><a href="">0xa83202b9346d9fa846f1b0b3bb0aadabea88908e</a>
-                    <li><a href="">0xd9bbeda239cf85ed4157ae333073597c8ee206bf</a>
-                    <li><a href="">0x54ff4c68d05e2598c9241ade09ac1fd5ffb8279c</a>
-                    <li><a href="">0xa7a629529599023207b3b89a7ee792ad20e6a8fb</a>
                 </ol>
             </div>
         </div>
@@ -120,19 +105,6 @@
         </div>
 
         <hr class="featurette-divider" id="contact">
-
-        <!-- Third Featurette -->
-<!--
-        <div class="featurette">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/312x312">
-            <h2 class="featurette-heading">The Third Heading
-                <span class="text-muted">Will Seal the Deal.</span>
-            </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-
-        <hr class="featurette-divider">
--->
 
         <!-- Footer -->
         <footer>
@@ -156,7 +128,7 @@
     <script type="text/javascript">
         var Web3 = require('web3');
         var web3 = new Web3();
-        var localProvider = new web3.providers.HttpProvider("http://localhost:8545");
+        var localProvider = new web3.providers.HttpProvider("http://10.0.110.143:8545");
         web3.setProvider(localProvider);
 
         var insuredAddresses = web3.eth.accounts;
