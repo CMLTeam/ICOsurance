@@ -21,7 +21,7 @@ contract InsuranceMasterContract is Verifiable {
         tokensBySymbol[icoSymbol] = true;
     }
 
-    function validateBySymbol(string icoSymbol) returns (bool) {
+    function validateBySymbol(string icoSymbol) constant returns (bool) {
         return tokensBySymbol[icoSymbol];
     }
     function verify(address icoTokenAddr) constant returns (bool ok) {
