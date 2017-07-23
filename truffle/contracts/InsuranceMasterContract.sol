@@ -3,6 +3,9 @@ pragma solidity ^0.4.8;
 import "./InsuranceToken.sol";
 import "./Verifiable.sol";
 
+//
+// Master contract through which Insurance Company creates and tracks all Insurance contracts.
+//
 contract InsuranceMasterContract is Verifiable {
     address owner;
     mapping(address => bool) tokensByAddress;
