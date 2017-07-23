@@ -170,8 +170,12 @@
             verifyStatusPlaceholder.innerHTML = validateAnAddress(verifyAddrInput.value);
         }
 
+        function fill(address) {
+            verifyAddrInput.value = address;
+        }
+
         insuredAddresses.forEach(function(e, i) {
-            insuredAddrContainer.innerHTML += ("<li><span><a href='#'>" + e + "</a></span>");
+            insuredAddrContainer.innerHTML += ("<li><span><a href='javascript:fill(\"" + e + "\")'>" + e + "</a></span>");
         });
 
 
