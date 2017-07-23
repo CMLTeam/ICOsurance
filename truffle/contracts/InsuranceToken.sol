@@ -12,7 +12,7 @@ import "./ERC20.sol";
 // to sell them back to this contract (to recover their ETH) till this is unlocked by Insurer Company
 // after Claim investigation.
 //
-contract InsuranceToken is ERC20 {
+contract InsuranceToken /*is ERC20*/ {
 	string public constant symbol = "COOL_INS";
 	string public constant name = "COOL Insurance Token";
 	uint8 public constant decimals = 18;
@@ -22,6 +22,7 @@ contract InsuranceToken is ERC20 {
     // This should be belonging to Insurance company
 	address public owner;
 
+	event Transfer(address indexed _from, address indexed _to, uint256 _value);
 	event EligibleToReimburse(bool val);
 
 	// Balances for each account
@@ -41,9 +42,9 @@ contract InsuranceToken is ERC20 {
 		owner = msg.sender;
 	}
 
-	function totalSupply() constant returns (uint256 totalSupply) {
-		return 0; // hmm
-	}
+//	function totalSupply() constant returns (uint256 totalSupply) {
+//		return 0; // hmm
+//	}
 
 	function balanceOf(address _owner) constant returns (uint256 balance) {
 		return balances[_owner];
@@ -76,19 +77,19 @@ contract InsuranceToken is ERC20 {
 	}
 
 	// not used
-	function transferFrom(address _from, address _to, uint256 _amount) returns (bool success) {
-		throw;
-	}
+//	function transferFrom(address _from, address _to, uint256 _amount) returns (bool success) {
+//		throw;
+//	}
 
 	// not used
-	function approve(address _spender, uint256 _amount) returns (bool success) {
-		throw;
-	}
+//	function approve(address _spender, uint256 _amount) returns (bool success) {
+//		throw;
+//	}
 
 	// not used
-	function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
-		return 0;
-	}
+//	function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
+//		return 0;
+//	}
 
 	// issue insurance token to the investor in exchange to ETH
 	function () payable {
