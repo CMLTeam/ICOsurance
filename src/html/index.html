@@ -1,50 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>ICOsurance – ICO Insurance in Ethereum</title>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-		  integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ICOsurance – ICO Insurance in Ethereum</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/one-page-wonder.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="http://getbootstrap.com/2.3.2/assets/css/docs.css" rel="stylesheet"/>
+
+    <!-- Web3 JS -->
+    <script type="text/javascript" src="web3/web3.js"></script>
 </head>
+
 <body>
-<h1>ICOsurance</h1>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">ICOsurance</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#about">List of Insured</a>
+                    </li>
+                    <li>
+                        <a href="#services">How to Apply</a>
+                    </li>
+<!--
+                    <li>
+                        <a href="#contact">Contact Us</a>
+                    </li>
+-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Full Width Image Header -->
+    <header class="header-image">
+        <div class="headline">
+            <div class="container">
+                <h1>ICOsurance</h1>
+                <h2>ICOs got Insured</h2>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <hr class="featurette-divider" id="about">
+
+        <!-- First Featurette -->
+        <div class="featurette">
+            <img class="featurette-image img-circle img-responsive pull-right" src="images/1.jpg" width="312">
+            <h2 class="featurette-heading">List of Insured ICOs
+                <span class="text-muted">Will Help You Find Trustworthy ICO</span>
+            </h2>
+            <div class="lead">
+                <label for="verify_addr">Verify if the ICO is Insured:</label><br/>
+                <input type="text" id="verify_addr"> <input type="button" value="Verify" onclick="verify()"> <span id="verify_status"></span>
+            </div>
+            <div class="lead">
+                List of ICOs Insured:
+                <ol style="font: 0.7em monospace;" id="insured_addresses">
+                    <li><a href="">0x7b2419e0ee0bd034f7bf24874c12512acac6e21c</a>
+                    <li><a href="">0x9c7bc14e8a4b054e98c6db99b9f1ea2797baee7b</a>
+                    <li><a href="">0x8d6d63c22d114c18c2a0da6db0a8972ed9c40343</a>
+                    <li><a href="">0x9567397b445998e7e405d5fc3d239391bf5d0200</a>
+                    <li><a href="">0x5d2fca837fdfddcb034555d8e79ca76a54038e16</a>
+                    <li><a href="">0xd3b6b8528841c1c9a63ffa38d96785c32e004fa5</a>
+                    <li><a href="">0xa83202b9346d9fa846f1b0b3bb0aadabea88908e</a>
+                    <li><a href="">0xd9bbeda239cf85ed4157ae333073597c8ee206bf</a>
+                    <li><a href="">0x54ff4c68d05e2598c9241ade09ac1fd5ffb8279c</a>
+                    <li><a href="">0xa7a629529599023207b3b89a7ee792ad20e6a8fb</a>
+                </ol>
+            </div>
+        </div>
+
+        <hr class="featurette-divider" id="services">
+
+        <!-- Second Featurette -->
+        <div class="featurette">
+            <img class="featurette-image img-circle img-responsive pull-left" src="images/2-312.jpg" width="312">
+            <h2 class="featurette-heading">Applying for ICOsurance
+                <span class="text-muted">Is Super Simple.</span>
+            </h2>
+            <p class="lead">Just give us a try.</p>
+        </div>
+
+        <hr class="featurette-divider" id="contact">
+
+        <!-- Third Featurette -->
+<!--
+        <div class="featurette">
+            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/312x312">
+            <h2 class="featurette-heading">The Third Heading
+                <span class="text-muted">Will Seal the Deal.</span>
+            </h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+
+        <hr class="featurette-divider">
+-->
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; ICOsurance 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
 
-<div class="container">
-	<div class="row">
-		<div class="col">
-			1 of 2
-		</div>
-		<div class="col">
-			1 of 2
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			1 of 3
-		</div>
-		<div class="col">
-			1 of 3
-		</div>
-		<div class="col">
-			1 of 3
-		</div>
-	</div>
-</div>
+    <script type="text/javascript">
+        var Web3 = require('web3');
+        var web3 = new Web3();
+        var localProvider = new web3.providers.HttpProvider("http://localhost:8545");
+        web3.setProvider(localProvider);
 
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-		integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-		crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-		crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-		integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-		crossorigin="anonymous"></script>
+        var insuredAddresses = web3.eth.accounts;
+
+        var insuredAddrContainer = document.getElementById("insured_addresses");
+        var verifyAddrInput = document.getElementById("verify_addr");
+        var verifyStatusPlaceholder = document.getElementById("verify_status");
+
+        insuredAddrContainer.innerHTML = "<li><a href='#'>" + insuredAddresses.join("</a><li><a href='#'>") + "</a>";
+
+        insuredAddresses.forEach(function() {
+
+        });
+
+        function verify() {
+            var address = verifyAddrInput.value;
+            if(address.length == 0) {
+                verifyStatusPlaceholder.innerHTML = "EMPTY ADDRESS";
+            }
+            else if(insuredAddresses.indexOf(address) != -1) {
+                verifyStatusPlaceholder.innerHTML = "OK";
+            }
+            else {
+                verifyStatusPlaceholder.innerHTML = "FAIL";
+            }
+        }
+    </script>
+
 </body>
+
 </html>
